@@ -90,7 +90,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
   }
 
   void _editContact() {
-    Navigator.pushReplacement(
+    Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => ContactBuilderScreen(contact: widget.contact),
@@ -462,6 +462,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
   }) {
     return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(30),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

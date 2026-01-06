@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:contact_app/models/contact.dart';
 import 'package:contact_app/provider/contact_provider.dart';
+import 'package:contact_app/screen/contact_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -74,7 +75,7 @@ class _ContactBuilderScreenState extends State<ContactBuilderScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter a valid phone number'), backgroundColor: Colors.red),
       );
-      return; // Stop saving
+      return;
     }
 
     final name = _nameController.text;
@@ -95,6 +96,7 @@ class _ContactBuilderScreenState extends State<ContactBuilderScreen> {
         isFavorite: _isFavorite,
       );
       provider.addContact(newContact);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => ContactDetailScreen(contact: newContact)));
     } else {
       final updatedContact = widget.contact!.copyWith(
         name: name,
@@ -105,9 +107,9 @@ class _ContactBuilderScreenState extends State<ContactBuilderScreen> {
         isFavorite: _isFavorite,
       );
       provider.updateContact(updatedContact);
+      Navigator.pop(context);
     }
 
-    Navigator.pop(context);
   }
 
   @override
@@ -115,12 +117,6 @@ class _ContactBuilderScreenState extends State<ContactBuilderScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.contact == null ? 'Add Contact' : 'Edit Contact'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.check),
-            onPressed: _saveContact,
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -223,6 +219,38 @@ class _ContactBuilderScreenState extends State<ContactBuilderScreen> {
                 title: const Text('Mark as Favorite'),
                 value: _isFavorite,
                 onChanged: (val) => setState(() => _isFavorite = val),
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                  ),
+                  child: const Text('Cancel'),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: _saveContact,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    backgroundColor: Theme.of(context).primaryColor,
+                    foregroundColor: Colors.white,
+                  ),
+                  child: const Text('Save'),
+                ),
               ),
             ],
           ),
