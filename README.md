@@ -1,16 +1,21 @@
-# contact_app
+# Contact App
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+A Flutter application for managing personal contacts.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📱 Download
+
+[**Download the latest APK here**](https://github.com/PSCHKLLR/flutter_contact_app/releases/download/v1.0.0/contact_app.apk)
+
+
+
+## Features
+
+* Add, Edit, Delete Contacts
+
+* Batch Selection & Deletion
+
+* Share Contacts as Text or vCard
